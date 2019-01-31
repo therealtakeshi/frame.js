@@ -78,12 +78,13 @@ Menubar.File = function ( editor ) {
 	function Export () {
 
 		var output = JSON.stringify( editor.toJSON(), null, '\t' );
-
-		var blob = new Blob( [ output ], { type: 'text/plain' } );
-		var objectURL = URL.createObjectURL( blob );
-
-		window.open( objectURL, '_blank' );
-		window.focus();
+		var filename = 'framejs.json';
+		var contentType = 'application/octet-stream';
+		var a = document.createElement('a');
+		var blob = new Blob([output], {'type':contentType});
+		a.href = window.URL.createObjectURL(blob);
+		a.download = filename;
+		a.click(); 
 
 	}
 
